@@ -18,7 +18,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: mycrm_user
-      POSTGRES_PASSWORD: mycrm_admin@123
+      POSTGRES_PASSWORD: mycrm_admin123
       POSTGRES_DB: mycrm_db
     ports:
       - "5430:5432"
