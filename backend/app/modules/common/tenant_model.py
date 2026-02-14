@@ -11,6 +11,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
 from app.core.database import Base
 
 class TenantStatus(str,enum.Enum):
@@ -35,6 +36,10 @@ class Tenant(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False,index=True)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
     deleted_at = Column(DateTime(timezone=True), nullable=True)
+
+    users= relationship("User", back_populates="tenant", cascade="all, delete-orphan")
+    organizations = relationship("Organization", back_populates="tenant", cascade="all, delete-orphan")
+    
 
     def __repr__(self) -> str:
         return f"<Tenant id={self.id} name={self.name} status={self.status}>"
