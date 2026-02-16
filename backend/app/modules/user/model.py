@@ -55,6 +55,11 @@ class User(Base):
     role = relationship("Role", back_populates="users")
     profile = relationship("Profile", back_populates="users")
     created_by_user = relationship("User", remote_side=[id],foreign_keys=[created_by], backref="created_users")
+    created_roles = relationship("Role", foreign_keys="Role.created_by", back_populates="creator")
+    updated_roles = relationship("Role", foreign_keys="Role.updated_by", back_populates="updater")
+    
+
 
     def __repr__(self) -> str:
         return f"<User id={self.id} email={self.email} tenant_id={self.tenant_id}>"
+    
