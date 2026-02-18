@@ -39,7 +39,8 @@ class Tenant(Base):
 
     users= relationship("User", back_populates="tenant", cascade="all, delete-orphan")
     organizations = relationship("Organization", back_populates="tenant", cascade="all, delete-orphan")
-    
+    profiles = relationship("Profile", back_populates="tenant", cascade="all, delete-orphan")
+    roles = relationship("Role", back_populates="tenant", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"<Tenant id={self.id} name={self.name} status={self.status}>"

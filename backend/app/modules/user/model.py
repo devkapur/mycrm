@@ -28,8 +28,8 @@ class User(Base):
     mobile = Column(String(20), nullable = True)
     fax = Column(String(20), nullable = True)
     status = Column(Enum(UserStatus), nullable = False, default = UserStatus.active, index = True)
-    role_id = Column(UUID(as_uuid = True), ForeignKey("roles.id",ondelete= "SET NULL"), nullable = True, index = True)
-    profile_id = Column(UUID(as_uuid = True), ForeignKey("profiles.id", ondelete = "SET NULL"), nullable = True, index = True)
+    role_id = Column(UUID(as_uuid = True), ForeignKey("roles.id",ondelete= "SET NULL", use_alter=True, name="fk_users_role_id"), nullable = True, index = True)
+    profile_id = Column(UUID(as_uuid = True), ForeignKey("profiles.id", ondelete = "SET NULL", use_alter=True, name="fk_users_profile_id"), nullable = True, index = True)
     street = Column(String(100), nullable = True)
     city = Column(String(100), nullable = True)
     state = Column(String(100), nullable = True)
@@ -45,6 +45,7 @@ class User(Base):
     created_at = Column(DateTime(timezone = True), server_default = func.now(), nullable = False)
     created_by = Column(UUID(as_uuid = True), ForeignKey("users.id", ondelete = "SET NULL"), nullable = True, index = True)
     updated_at = Column(DateTime(timezone = True), server_default = func.now(), onupdate = func.now(), nullable = False)
+    updated_by = Column(UUID(as_uuid = True), ForeignKey("users.id", ondelete = "SET NULL"), nullable = True, index = True)
     deleted_at = Column(DateTime(timezone = True), nullable = True)
     
     __table_args__ =(
@@ -55,9 +56,11 @@ class User(Base):
     role = relationship("Role", back_populates="users")
     profile = relationship("Profile", back_populates="users")
     created_by_user = relationship("User", remote_side=[id],foreign_keys=[created_by], backref="created_users")
+    updated_by_user = relationship("User", remote_side=[id], foreign_keys=[updated_by], backref="updated_users")  
     created_roles = relationship("Role", foreign_keys="Role.created_by", back_populates="creator")
     updated_roles = relationship("Role", foreign_keys="Role.updated_by", back_populates="updater")
-    
+    created_profiles = relationship("Profile", foreign_keys="Profile.created_by", back_populates="creator")
+    updated_profiles = relationship("Profile", foreign_keys="Profile.updated_by", back_populates="updater")
 
 
     def __repr__(self) -> str:

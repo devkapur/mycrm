@@ -46,9 +46,8 @@ class Role(Base):
         CheckConstraint(
         "data_scope IN ('all', 'hierarchy', 'own', 'team')",
           name = "check_role_data_scope"
-          ).
+          ),
         Index("ix_role_active","is_active"),
-        Index("ix_role_level", "level"),
         Index("ix_roles_active_not_deleted", "is_active",postgresql_where = text("deleted_at IS NULL")),
 
     )

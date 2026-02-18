@@ -4,6 +4,10 @@ from app.core.database import Base
 from app.modules.common.tenant_model import Tenant, TenantStatus
 from app.modules.common.organization_model import Organization
 from app.modules.user.model import User, UserStatus
+from app.modules.profile.model import Profile
+from app.modules.role.model import Role
+from app.modules.auth.model import AuthCredential
+from app.modules.contact.model import Contact
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
