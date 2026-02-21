@@ -8,6 +8,9 @@ from app.modules.profile.model import Profile
 from app.modules.role.model import Role
 from app.modules.auth.model import AuthCredential
 from app.modules.contact.model import Contact
+from app.modules.account.model import Account
+from app.modules.pipeline.model import Pipeline
+from app.modules.pipeline_stage.model import PipelineStage
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 

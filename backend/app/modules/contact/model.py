@@ -63,7 +63,7 @@ class Contact(Base):
     __table_args__ = (
         Index('uq_contact_tenant_email', 'tenant_id', 'email', unique=True, 
               postgresql_where=text("email IS NOT NULL AND deleted_at IS NULL")),
-        Index('ix_contact_full_name_search','tenant_id', 'full_name', postgresql_using='gin', postgresql_ops={'full_name': 'gin_trgm_ops'}),
+        Index('ix_contact_full_name_search','full_name', postgresql_using='gin', postgresql_ops={'full_name': 'gin_trgm_ops'}),
  	
     )
     
