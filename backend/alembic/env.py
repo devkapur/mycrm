@@ -11,6 +11,8 @@ from app.modules.contact.model import Contact
 from app.modules.account.model import Account
 from app.modules.pipeline.model import Pipeline
 from app.modules.pipeline_stage.model import PipelineStage
+from app.modules.pipeline_record.model import PipelineRecord
+from app.modules.activites.model import Activity    
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 

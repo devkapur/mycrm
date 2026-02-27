@@ -12,16 +12,16 @@ class PipelineStage(Base):
     pipeline_id = Column(UUID(as_uuid=True), ForeignKey("pipelines.id", ondelete="CASCADE"), nullable=False, index=True)
     name = Column(String(255), nullable=False, index=True)
     description = Column(Text, nullable=True)
-    probability = Column(Integer, nullable=True, default=0)  # Probability of closing the deal at this stage (0-100)
-    is_won_stage = Column(Boolean, nullable=False, default=False)  # Indicates if this stage is a "won" stage
-    is_lost_stage = Column(Boolean, nullable=False, default=False)  # Indicates if this stage is a "lost" stage
-    is_closed = Column(Boolean, nullable=False, default=False)  # Indicates if this stage is a closed stage (either won or lost)
-    order_index = Column(Integer, nullable=True)  # Position of the stage within the pipeline
+    probability = Column(Integer, nullable=True, default=0) 
+    is_won_stage = Column(Boolean, nullable=False, default=False)  
+    is_lost_stage = Column(Boolean, nullable=False, default=False)
+    is_closed = Column(Boolean, nullable=False, default=False) 
+    order_index = Column(Integer, nullable=True) 
     custom_fields = Column(JSONB, nullable=True, default=dict)
-    auto_actions = Column(JSONB, nullable=True, default=dict)  # Define any automatic actions/triggers for this stage
-    color_code = Column(String(7), nullable=True)  # Optional color code for UI representation
-    icon = Column(String(100), nullable=True)  # Optional icon for UI representation
-    is_active = Column(Boolean, nullable=False, default=True)  # Indicates if this stage is active
+    auto_actions = Column(JSONB, nullable=True, default=dict)  
+    color_code = Column(String(7), nullable=True) 
+    icon = Column(String(100), nullable=True) 
+    is_active = Column(Boolean, nullable=False, default=True)  
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False, index=True)
     created_by = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)

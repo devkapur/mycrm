@@ -16,6 +16,7 @@ class Pipeline(Base):
     is_default = Column(Boolean, nullable=False, default=False)
     is_active = Column(Boolean, nullable=False, default=True, index=True)
     pipeline_type = Column(String(50), nullable=True, default="sales", index=True)  # sales, support, onboarding
+    record_label = Column(String(100), nullable=True, index = True)  # e.g. Deal, Ticket, etc.
     currency = Column(String(10), nullable=True)
     allow_stage_skip = Column(Boolean, nullable=False, default=False)
     automation_rules = Column(JSONB, nullable=True, default=dict) 
