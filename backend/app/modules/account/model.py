@@ -9,7 +9,7 @@ class Account(Base):
     __tablename__ = "accounts"
     
     # === CORE IDENTITY ===
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid7, server_default=text("gen_random_uuid()"), index=True)
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid7, server_default=text("gen_random_uuid()"), index=True  )
     tenant_id = Column(UUID(as_uuid=True), ForeignKey("tenants.id", ondelete="CASCADE"), nullable=False, index=True)
   
     # === BASIC INFORMATION ===
