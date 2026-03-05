@@ -4,7 +4,6 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, Foreign
 from uuid_utils import uuid7
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
-from app.modules.common.tenant_model import Tenant
 from app.core.database import Base
 
 class UserStatus(str, enum.Enum):
@@ -12,6 +11,7 @@ class UserStatus(str, enum.Enum):
     inactive = "inactive"
     suspended = "suspended"
     deleted = "deleted"
+    
 class User(Base):
     __tablename__ = "users"
 
@@ -57,6 +57,7 @@ class User(Base):
     updated_roles = relationship("Role", foreign_keys="Role.updated_by", back_populates="updater")
     created_profiles = relationship("Profile", foreign_keys="Profile.created_by", back_populates="creator")
     updated_profiles = relationship("Profile", foreign_keys="Profile.updated_by", back_populates="updater")
+    auth_credential = relationship("AuthCredential", back_populates="user", uselist=False, cascade="all, delete-orphan")
 
     __table_args__ =(
         UniqueConstraint("tenant_id", "email", name = "uq_user_tenant_email"),
