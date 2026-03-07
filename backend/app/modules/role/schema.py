@@ -5,14 +5,15 @@ from datetime import datetime
 
 
 class RoleCreate(BaseModel):
-    name: str
-    slug: Optional[str] = None
-    description: Optional[str] = None
-
+    name: str                           
+    description: Optional[str] = None  
+    level: int                         
+    reporting_to: Optional[UUID] = None 
+    data_scope: str = "hierarchy"       
+    share_with_peers: bool = False 
 
 class RoleUpdate(BaseModel):
     name: Optional[str] = None
-    slug: Optional[str] = None
     description: Optional[str] = None
     level: Optional[int] = None
     reporting_to: Optional[UUID] = None

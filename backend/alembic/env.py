@@ -2,7 +2,7 @@ from logging.config import fileConfig
 
 from app.core.database import Base
 from app.modules.common.tenant_model import Tenant, TenantStatus
-from app.modules.common.organization_model import Organization
+from backend.app.modules.org.model import Organization
 from app.modules.user.model import User, UserStatus
 from app.modules.profile.model import Profile
 from app.modules.role.model import Role
